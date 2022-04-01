@@ -1,158 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>易广金出入凭证生成器</title>
-    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
-    <meta content="yes" name="apple-mobile-web-app-capable" />
-    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
-    <meta content="telephone=no" name="format-detection" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/time.js"></script>
-    <script type="text/javascript" src="js/qrcode.js"></script>
+    <meta charset="utf-8">
+    <title>出校申报</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="https://ygj.gduf.edu.cn/leavehelper_20220228/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="https://ygj.gduf.edu.cn/leavehelper_20220228/css/app.css" />
+    <style>
+        .footerBtnBox {
+            padding: 10px;
+            height: 54px;
+        }
+
+        .mui-card-footer.footerBtnBox .mui-card-link {
+            text-align: center;
+            background: #3a96fa;
+            width: 49%;
+            display: block;
+            color: #fff;
+            border-radius: 5px;
+            line-height: 34px;
+            height: 34px;
+            transition: all 0.3s;
+        }
+
+            .mui-card-footer.footerBtnBox .mui-card-link:last-child {
+                background: #EA5628
+            }
+
+                .mui-card-footer.footerBtnBox .mui-card-link:last-child:active {
+                    background: #CF2D28
+                }
+
+            .mui-card-footer.footerBtnBox .mui-card-link:active {
+                background: #007AFF;
+            }
+    </style>
 </head>
 
 <body>
-<script type="text/javascript">
-	windows.alert("哈！")
-</script>
-    <section class="aui-flexView">
-        <header class="aui-navBar aui-navBar-fixed">
-            <div class="aui-center">
-                <span class="aui-center-title">出入</span>
-            </div>
-        </header>
-        <section class="aui-scrollView">
-            <div class="aui-code-box" id="content">
-                <form action="">
-                    <p class="aui-code-line">
-                        <input type="text" class="aui-code-line-input" name="search" value="" id="studentName"
-                               autocomplete="off" placeholder="请输入姓名" />
-                    </p>
-                    <p class="aui-code-line">
-                        <input type="text" class="aui-code-line-input" name="search" value="" id="studentId"
-                               autocomplete="off" placeholder="请输入学号" />
-                    </p>
 
-                    <p class="aui-code-line">
-                        <input type="text" class="aui-code-line-input" name="search" value="" id="className"
-                               autocomplete="off" placeholder="请输入班级名称" />
-                        格式:18保险学-2班
-                    </p>
-                    <p class="aui-code-line">
-                        <input type="text" class="aui-code-line-input" name="search" value="" id="specialty"
-                               autocomplete="off" placeholder="请输入专业" />
-                    </p>
-                    <p class="aui-code-line">
-                        <input type="text" class="aui-code-line-input" name="search" value="" id="departmentName"
-                               autocomplete="off" placeholder="请输入学院名称" />
-                    </p>
-                    <p class="aui-code-line">
-                        <input type="text" class="aui-code-line-input" name="search" value="" id="auditName"
-                               autocomplete="off" placeholder="请输入辅导员" />
-                    </p>
-                    <p class="aui-code-line">
-                        <input type="text" class="aui-code-line-input" name="search" value="" id="outType"
-                               autocomplete="off" placeholder="请输入外出原因" />
-                    </p>
-                    <br />
-                    <div class="tab">
-                        <button class="tablinks  active" id='male' onClick="changeSex()">男</button>
-                        <button class="tablinks" id="female" onclick="changeSex()">女</button>
-                    </div>
-                    <br />
-                    <div class="aui-che-item">
-                        <div class="aui-cell-che">
-                            <input type="checkbox" class="aui-well-check" name="checkbox1" id="checkbox1"
-                                   checked="checked">
-                            <i class="aui-well-icon-checked"></i>
-                        </div>我已经阅读并同意 <a href="disclaimer.html">《免责声明》</a> 主要源码来源雍和明
-                    </div>
+    <div class="mui-content" id="outSchoolBox" style="padding-bottom: 45px;">
 
-                    <div class="aui-code-btn">
-                        <button type="button" onClick="next()" id="bt1">生成二维码(推荐)</button>
-                    </div>
+    </div>
 
-                    <br />
+    <nav class="footerNav">
+        <button class="whiteBtn">
+            <span class="mui-icon mui-icon-more"></span>
+            <span>申请记录</span>
+        </button>
+        <button>
+            <span class="mui-icon mui-icon-compose"></span>
+            <span>出校申报</span>
+        </button>
+    </nav>
 
-                    <font color="#FF0000">(推荐)生成二维码后截图保存，用易班扫一扫打开</font>
-                    <br />
-                    <div class="aui-code-btn">
-                        <button type="button" onClick="gonext()" id="bt1">直接进入页面</button>
-                    </div>
-                </form>
-            </div>
-           
-            <div id="result" class="aui-code-box" style="display: none;">
-                <br />
-                <div id="qrcodeTable" align="center"></div>
-                <br />
-		 <font color="#FF0000">(推荐)生成二维码后截图保存，用易班扫一扫打开</font>
-                <br />
-	        <br />
-                <button type="button" onClick="back()">返回</button>
-            </div>
-        </section>
-    </section>
+    <script src="https://ygj.gduf.edu.cn/leavehelper_20220228/js/mui.min.js"></script>
+    <script src="https://ygj.gduf.edu.cn/leavehelper_20220228/js/jquery.min.js"></script>
+    <script src="https://ygj.gduf.edu.cn/leavehelper_20220228/js/common.js"></script>
 
-    <script type="text/javascript" charset="utf-8">
-        var sex = '男';
-        function next() {
-            
-            url = geturl();
-	    var qrcode = new QRCode('qrcodeTable', { // qrcode为id
-	              text: encodeURI(url),
-	              width : 300,
-	              height : 300
-                });
-                //隐藏 与 显示 相关区域
-        document.getElementById('content').style.display = 'none';
-        document.getElementById('result').style.display = '';
-            
-        };
-        function back() {
-            document.getElementById('content').style.display = '';
-            document.getElementById('result').style.display = 'none';
-            document.getElementById('qrcodeTable').innerHTML = '';
-        }
-        function changeSex() {
-            if (sex == '男') {
-                document.getElementById('male').className = 'tablinks';
-                document.getElementById('male').disabled = false;
-                document.getElementById('female').disabled = true;
-                document.getElementById('female').className = 'tablinks  active';
-                sex = '女';
-            }
-            else {
-                document.getElementById('female').className = 'tablinks';
-                document.getElementById('female').disabled = false;
-                document.getElementById('male').disabled = true;
-                document.getElementById('male').className = 'tablinks  active';
-                sex = '男';
-            }
-        };
-        function geturl() {
-            var name = document.getElementById('studentName').value.replace(/(^\s*)|(\s*$)/g, '');
-            var id = document.getElementById('studentId').value.replace(/(^\s*)|(\s*$)/g, '');
-            //新
-            var className = document.getElementById('className').value.replace(/(^\s*)|(\s*$)/g, '');
-            var specialty = document.getElementById('specialty').value.replace(/(^\s*)|(\s*$)/g, '');
-            var departmentName = document.getElementById('departmentName').value.replace(/(^\s*)|(\s*$)/g, '');
-            var auditName = document.getElementById('auditName').value.replace(/(^\s*)|(\s*$)/g, '');
-            var outType = document.getElementById('outType').value.replace(/(^\s*)|(\s*$)/g, '');
-            var checkstatus = document.getElementById('checkbox1').checked;
-            if (checkstatus == true) {
-                url = "https://isfive.github.io/beta-default.html?studentName=" + name + "&studentId=" + id + "&studentSex=" + sex + "&className=" + className + "&specialty=" + specialty + "&departmentName=" + departmentName + "&auditName=" + auditName + "&outType=" + outType;
+    <script>
+        function getParam() {
+            var url = location.search; //获取url中"?"符后的字串
+            var info = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    if (strs[i].indexOf("studentName=") != -1) {
+                        info['studentName'] = decodeURIComponent(strs[i].replace("studentName=", ""));
+                    };
+                    if (strs[i].indexOf("studentId=") != -1) {
+                        info['studentId'] = decodeURIComponent(strs[i].replace("studentId=", ""));
+                    };
+                    if (strs[i].indexOf("studentSex=") != -1) {
+                        info['studentSex'] = decodeURIComponent(strs[i].replace("studentSex=", ""));
+                    };
+                    if (strs[i].indexOf("outType=") != -1) {
+                        info['outType'] = decodeURIComponent(strs[i].replace("outType=", ""));
+                    };
+                };
+                return info;
             } else {
-                alert("请先阅读并同意免责说明书！");
+                info = { 'studentName': '林欣怡', 'studentId': '211435213', 'studentSex': '女' }
+                return info;
             }
-            return url
-        };
-        function gonext() {
-            url = geturl();
-            window.location.href = url;
+        }
+
+        (function (mui) {
+            mui.init();
+            getMyOutSchool();
+        })(mui);
+
+        function getMyOutSchool(result) {
+            var randomNum = '';
+            for (var i = 0; i < 5; i++) {
+                randomNum += Math.floor(Math.random() * 10);
+            }
+            var result = {
+                "msg": "查询成功",
+                "data": [
+                    {
+                        "outSchoolID": new Date().Format("yyyyMMdd" + randomNum),
+                        "studentID": getParam()["studentId"],
+                        "sex": getParam()["studentSex"],
+                        "name": getParam()["studentName"],
+                        "submitDate": new Date(new Date().getTime() - 14400000).Format("yyyy/MM/dd hh:mm:ss"),
+                        "passNum": "每天出入一次",
+                        "days": "3",
+                        "status": "1",
+                        "otherOutType": "",
+                        "outType": getParam()["outType"],
+                        "startDate": new Date().Format("yyyy/MM/dd hh:mm:ss"),
+                        "endDate": new Date(new Date().getTime() + 259200000).Format("yyyy/MM/dd hh:mm:ss")
+                    }
+                ],
+                "code": 0
+            };
+            var html = '';
+            var strs = location.search;
+            for (var i = 0; i < result.data.length; i++) {
+                html += '<div class="mui-card">';
+                html += '<div class="mui-card-header">申请编号：' + result.data[i].outSchoolID + '</div>';
+                html += '<div class="mui-card-content">';
+                html += '<div class="mui-card-content-inner">';
+                html += '<div>姓<span style="visibility: hidden;">空空</span>名：' + result.data[i].name + '</div>';
+                html += '<div>学<span style="visibility: hidden;">空空</span>号：' + result.data[i].studentID + '</div>';
+                html += '<div>开始时间：' + new Date(result.data[i].startDate).Format("yyyy-MM-dd") + '</div>';
+                html += '<div>结束时间：' + new Date(result.data[i].endDate).Format("yyyy-MM-dd") + '</div>';
+                html += '<div>外出类型：' + result.data[i].outType + " " + result.data[i].otherOutType + '</div>';
+                html += '<div>涉及天数：' + result.data[i].days + '天</div>';
+                html += '<div>出入次数：' + result.data[i].passNum + '</div>';
+                html += '<div>状<span style="visibility: hidden;">空空</span>态：' + formatStatus(result.data[i]) + '</div>';
+                html += '<div>提交时间：' + new Date(result.data[i].submitDate).Format("yyyy-MM-dd hh:mm:ss") + '</div>';
+                html += '</div>';
+                html += '</div>';
+                html += '<div class="mui-card-footer footerBtnBox">';
+                html += '<a class="mui-card-link" href="beta-detail.html' + strs +'"' + '>详情</a>';
+                if (result.data[i].status == 0)
+                    html += '<a class="mui-card-link" >取消</a>';
+                else {
+                    html += '<a class="mui-card-link" style="background:#eee;color:#999">取消</a>';
+                }
+                html += '</div>';
+                html += '</div>';
+            }
+            if (html == '')
+                html = '<div class="msgBox">无任何记录</div>';
+            $("#outSchoolBox").html(html);
+        }
+
+        function formatStatus(item) {
+            if (item.status == "0")
+                return "审批中";
+            if (item.status == "1")
+                return item.outType == "临时出校（一天仅一次）" ? "<font color=green>报备完成</font>" : "<font color=green>审批通过</font>";
+            if (item.status == "2")
+                return "<font color=red>审批拒绝</font>";
+            if (item.status == "3")
+                return "<font color=orange>需补正</font>";
+            return s;
         }
     </script>
 </body>
